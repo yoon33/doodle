@@ -17,7 +17,6 @@ export function MenuOne(props){
     )
 }
 
-//This is an example of new code that is not in the master branch but is in the avatar-modal branch.
 const Root = styled.div`
     display: flex;
     flex-direction: column;

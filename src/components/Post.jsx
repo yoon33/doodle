@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Comments } from './Comments';
-import styled from 'styled-components';
+import styled from 'styled-components'
+import { AvatarModal } from './AvatarModal';
 
 export function Post(props) {
 
@@ -17,7 +18,7 @@ export function Post(props) {
     return (
         <Root>
             <AuthorDetails>
-                <Profile style={{backgroundImage: 'url("https://i.pinimg.com/originals/e0/f0/e8/e0f0e8ab0cb3edda52e1312be241b449.jpg")', backgroundSize: 'cover'}}></Profile>
+                <AvatarModal/>
                 <Details>
                     <DetailLog>nickname</DetailLog>
                     <DetailLog>01.01.1995</DetailLog>

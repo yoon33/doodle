@@ -52,17 +52,16 @@ export function Submission(props) {
     )   
 }
 
-const PreviewImage = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-`;
-
-
 const Image = styled.div`
     border-radius: 50%;
     background-color: white;
     margin-right: 1rem;
+`;
+
+const PreviewImage = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 `;
 
 const Icon = styled.div`
