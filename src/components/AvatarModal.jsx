@@ -1,28 +1,37 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import Modal from 'styled-react-modal';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeImage, changeUsername } from '../slices/userSlice';
 
-const someMagicFunctionThatGetsUserData = () => {
-    return {
-        image: 'https://i.pinimg.com/originals/e0/f0/e8/e0f0e8ab0cb3edda52e1312be241b449.jpg',
-        username: 'daisy19',
-        first: 'Daisy',
-        last: 'Doug'
-    }
-}
 
 export function AvatarModal(props) {
 
-    const [user, setUser] = useState(someMagicFunctionThatGetsUserData());
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.user);
+    const image = user.image;
+
+    const [username, setUsername] = useState(user.username);
     const [isOpen, setIsOpen] = useState(false);
 
-    const changeImage = (e) => {
-        console.log(e.target.files);
-        setUser({...user, image: e.target.files[0].name})
+    useEffect(() => {
+        console.log(image);
+    },[image])
+
+    const handleImage = (e) => {
+        //console.log('hi')
+        //console.log('changing the image')
+        //console.log(e.target.files[0].name);
+        dispatch(changeImage(e.target.files[0].name));
     }
 
     const toggleModal = (event) => {
         setIsOpen(!isOpen);
+    }
+
+    const handleUsername = (e) => {
+        console.log(`Your new username is ${username}`);
+        dispatch(changeUsername(username));
     }
 
     return(
@@ -30,9 +39,11 @@ export function AvatarModal(props) {
             <Image onClick={toggleModal} style={{backgroundImage: `url(${user.image})`}}></Image>
             <StyledModal isOpen = {isOpen}  onBackgroundClick={toggleModal} onEscapeKeydown={toggleModal}>
                 <Image style={{backgroundImage: `url(${user.image})`}}></Image>
+                <input type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
                 <input type="file"
                     id="avatar" name="avatar"
-                    accept="image/png, image/jpeg" onChange={changeImage}></input>
+                    accept="image/png, image/jpeg" onChange={handleImage}></input>
+                <button type="button" onClick={handleUsername}>Submit</button>
             </StyledModal>
         </div>
     )
@@ -44,7 +55,8 @@ const StyledModal = Modal.styled`
   height: 20rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction: column;
   background-color: white;
 `;
 

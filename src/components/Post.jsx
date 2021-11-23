@@ -2,10 +2,14 @@ import React, {useState} from 'react';
 import { Comments } from './Comments';
 import styled from 'styled-components'
 import { AvatarModal } from './AvatarModal';
+import { useSelector } from 'react-redux';
 
 export function Post(props) {
 
     const { text } = props;
+
+    const user = useSelector(state => state.user);
+    const username = user.username;
 
     const image = props.image ?? 'url("https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fdam%2Fimageserve%2F765877054%2F960x0.jpg%3Ffit%3Dscale")';
 
@@ -20,7 +24,7 @@ export function Post(props) {
             <AuthorDetails>
                 <AvatarModal/>
                 <Details>
-                    <DetailLog>nickname</DetailLog>
+                    <DetailLog>{username}</DetailLog>
                     <DetailLog>01.01.1995</DetailLog>
                 </Details>
             </AuthorDetails>
