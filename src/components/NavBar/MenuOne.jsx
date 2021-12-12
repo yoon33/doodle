@@ -5,14 +5,14 @@ export function MenuOne(props){
 
     return(
         <Root>
-            <BoxOne>
+            <Box>
                 <Img image = {"logout.png"} />
                 <p>logout</p>
-            </BoxOne>
-            <BoxTwo>
-            <Img image = {"user.png"} />
-            <p>account</p>
-            </BoxTwo>
+            </Box>
+            <Box>
+                <Img image = {"user.png"} />
+                <p>account</p>
+            </Box>
         </Root>
     )
 }
@@ -20,28 +20,23 @@ export function MenuOne(props){
 const Root = styled.div`
     display: flex;
     flex-direction: column;
-    height: 80px;
-    width: 12%;
+    border-radius: 4px;
+    border: 1px solid grey;
+    padding: 10px;
+    width: auto;
+    height: auto;
     margin: 0 auto;
     background-color: white;
     cursor: pointer;
-    border-radius: 10%;
+    position: absolute;
+    right: 10px;
 `;
 
-const BoxOne = styled.div`
+const Box = styled.div`
     display: flex;
     justify-content: space-between;
-    border-radius: 10%;
-
-    :hover {
-        background-color: #c2c2c2;
-    }
-`;
-
-const BoxTwo = styled.div`
-    display: flex;
-    justify-content: space-between;
-    border-radius: 10%;
+    width: auto;
+    gap: 30px;
 
     :hover {
         background-color: #c2c2c2;
