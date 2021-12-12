@@ -2,13 +2,18 @@ import React, {useEffect, useState} from 'react';
 import { useFilePicker } from 'use-file-picker';
 import styled from 'styled-components';
 import { Post } from './Post';
+import { useSelector } from 'react-redux';
 
 export function PreviewSubmission(props) {
     const {handleShow} = props;
 
+    const user = useSelector(state => state.user);
+
+    const image = user.image;
+
     return(
         <Root onClick={handleShow}>
-            <Image style={{width: '50px', height: '50px', backgroundImage: 'url("https://i.pinimg.com/originals/e0/f0/e8/e0f0e8ab0cb3edda52e1312be241b449.jpg")', backgroundSize: 'cover'}}></Image>
+            <Image style={{width: '50px', height: '50px', backgroundImage: `url("${image}")`, backgroundSize: 'cover'}}></Image>
             <SubmitBox isPreview={true} onSubmit = {(e) => { e.preventDefault(); } }>
                 Please make a comment. :)
             </SubmitBox>
@@ -52,17 +57,16 @@ export function Submission(props) {
     )   
 }
 
-const PreviewImage = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-`;
-
-
 const Image = styled.div`
     border-radius: 50%;
     background-color: white;
     margin-right: 1rem;
+`;
+
+const PreviewImage = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 `;
 
 const Icon = styled.div`
