@@ -3,10 +3,7 @@ import styled from 'styled-components';
 
 export function Banner(props) {
     return (
-        <Root image={"maple.jpeg"}>
-            <h1>It'ts Fall :)</h1>
-            <p>COLD</p>
-            <Corner>feed about </Corner>
+        <Root image={"winter.jpg"}>
         </Root>
     )
 }
@@ -14,15 +11,17 @@ export function Banner(props) {
 
 const Root = styled.div`
     background-image: url('${props => props.image}');
-    background-size: cover;
-    padding: 150px;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 400px;
     text-align: center;
-    color: white;
     font-size: 30px;
-`;
-
-const Corner = styled.div`
+    width: 85%;
     display: flex;
     justify-content: flex-end;
-    color: white;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    
 `;
+

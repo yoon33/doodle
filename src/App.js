@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
+import {useSelector} from "react-redux";
 import './App.css';
 import { Navbar } from './components/NavBar';
 import styled from 'styled-components';
@@ -12,6 +13,7 @@ import { Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { findByLabelText } from '@testing-library/react';
 import { ModalProvider } from 'styled-react-modal';
+import Login from './components/Login/Login';
 
 const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
@@ -21,16 +23,22 @@ function App() {
   const handleShow = () => setModalVisible(true);
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [posts, setPosts] = useState([{text: lorem, image: 'url(https://www.pngfind.com/pngs/m/252-2525572_golden-retriever-png-transparent-golden-retriever-png-png.png)'}, {text: "Peanutbutter jelly time"}, {text: "Hello world"}]);
+  const [posts, setPosts] = useState([{text: lorem, image: 'url(https://images.ctfassets.net/nx3pzsky0bc9/1iEFl85iyJNpOsyf7cuOso/490ade4e955f040f45b01f3105fe434a/golden2.jpg?w=1200&h=627&fit=fill&f=faces&fm=webp)'}, {text: "Peanutbutter jelly time"}, {text: "Hello world"}]);
 
 
+  const state = useSelector(state => state.user);
+  const isLoggedIn = state.isLoggedIn;
+
+  useEffect(() => {
+    console.log(isLoggedIn)
+  },[isLoggedIn])
 
   return (
     <ModalProvider>
     <Root>
       <Navbar/>
       <Banner/>
-      <Page>
+      {isLoggedIn ? <Page>
         <PostsContainer>
         <PreviewSubmission handleShow={handleShow}/>
           <Modal show={modalVisible}>
@@ -52,7 +60,7 @@ function App() {
           <Info titleOne="followers" iconOne={"followers.png"} titleTwo="story" iconTwo = "writing.png" valueOne="999,9999" valueTwo = "999"/>
           <Info titleOne="birthday" iconOne="birthday.png" dob="05/18/1994" titleTwo="#hashtag" iconTwo="trending.png" valueTwo="#kungflu"/>
         </Infos>
-      </Page>
+      </Page> : <Login/> }
     </Root>
     </ModalProvider>
   );
@@ -95,7 +103,7 @@ const Infos = styled.div`
   left: 0;
   align-self: start;
   flex-direction: column;
-  margin-right: 7rem;
+  margin-right: 15rem;
   padding-bottom: 10px;
   gap: 10px;
 `;

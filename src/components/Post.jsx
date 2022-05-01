@@ -11,7 +11,7 @@ export function Post(props) {
     const user = useSelector(state => state.user);
     const username = user.username;
 
-    const image = props.image ?? 'url("https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fdam%2Fimageserve%2F765877054%2F960x0.jpg%3Ffit%3Dscale")';
+    const image = props.image ?? 'url("https://images.ctfassets.net/nx3pzsky0bc9/1iEFl85iyJNpOsyf7cuOso/490ade4e955f040f45b01f3105fe434a/golden2.jpg?w=1200&h=627&fit=fill&f=faces&fm=webp")';
 
     const [expand, setExpand] = useState(false);
     const heartCount = 999;

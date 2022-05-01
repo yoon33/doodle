@@ -1,15 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
+import { logout } from '../../slices/userSlice';
+import { useDispatch } from 'react-redux';
 
 export function MenuOne(props){
 
+    const dispatch = useDispatch();
+    
+    function onLogout(e) {
+        dispatch(logout());
+    }
+    const {handleToggle} = props;
+
+    
     return(
         <Root>
-            <Box>
+            <Box onClick={onLogout}>
                 <Img image = {"logout.png"} />
                 <p>logout</p>
             </Box>
-            <Box>
+            <Box onClick={handleToggle}>
                 <Img image = {"user.png"} />
                 <p>account</p>
             </Box>
@@ -49,3 +59,4 @@ const Img = styled.div`
     width: 30px;
     background-size: contain;
 `;
+
