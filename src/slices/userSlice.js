@@ -23,10 +23,10 @@ export const userSlice = createSlice({
       state.username = username;
     },
     logout: (state) => {
-      state.isLoggedIn = false;
+      return {...state, isLoggedIn: false}
     },
     login: (state) => {
-      state.isLoggedIn = true;
+      return {...state, isLoggedIn: true}
     }
   },
 })
