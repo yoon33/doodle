@@ -54,7 +54,7 @@ export function AvatarModal(props) {
                     alignSelf:'flex-start'}}>
                     <NameInput type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
                     <h5>Seattle, WA</h5>
-                    <h6>PhD NEETology</h6>
+                    <h6>PhD</h6>
                     <h6>University of Pawbark</h6>
                     <Button type="button" onClick={handleUsername}>Submit</Button>
                 </div>

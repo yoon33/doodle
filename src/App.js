@@ -58,7 +58,7 @@ function App() {
         </PostsContainer>
         <Infos>
           <Info titleOne="followers" iconOne={"followers.png"} titleTwo="story" iconTwo = "writing.png" valueOne="999,9999" valueTwo = "999"/>
-          <Info titleOne="birthday" iconOne="birthday.png" dob="05/18/1994" titleTwo="#hashtag" iconTwo="trending.png" valueTwo="#kungflu"/>
+          <Info titleOne="birthday" iconOne="birthday.png" dob="05/18/1994" titleTwo="#hashtag" iconTwo="trending.png" valueTwo="#summer23"/>
         </Infos>
       </Page> : <Login/> }
     </Root>
