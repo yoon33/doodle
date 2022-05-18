@@ -95,10 +95,6 @@ const Login = (props) => {
   };
   return (
     <Card className={classes.login}>
-      <h1>Thank you for visiting my Facebook clone. Use any login credentials you wish to enter the site.
-        Email must be valid (i.e. contain an `@` and a domain extension).
-        Password must have at least 6 characters.
-      </h1>
       <form onSubmit={submitHandler}>
         <div
           className={`${classes.control} ${
@@ -130,7 +126,7 @@ const Login = (props) => {
         </div>
         <div className={classes.actions}>
           <Button type="submit" className={classes.btn} disabled={!formIsValid}>
-            Login
+            Create Account
           </Button>
         </div>
       </form>
