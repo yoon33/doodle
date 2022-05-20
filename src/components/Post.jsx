@@ -21,37 +21,40 @@ export function Post(props) {
 
     return (
         <Root>
-            <AuthorDetails>
-                <AvatarModal/>
-                <Details>
-                    <DetailLog>{username}</DetailLog>
-                    <DetailLog>01.01.1995</DetailLog>
-                </Details>
-            </AuthorDetails>
             <Postbox>
+                <AuthorDetails>
+                    <AvatarModal/>
+                    <Details>
+                        <DetailLog>{username}</DetailLog>
+                        <DetailLog>01.01.1995</DetailLog>
+                    </Details>
+                </AuthorDetails>
                 <PostImage style={{backgroundImage: image, backgroundSize: 'cover'}}></PostImage>
                 <PostWrite style ={{color: 'blue'}}>#hashtag</PostWrite>
                 <PostWrite>
                     <PostContent expand={expand}>{text}</PostContent>
                     <ReadMore onClick={(e) => { setExpand(!expand);}}>read more</ReadMore>
                 </PostWrite>
+            </Postbox>
+            <ReplyBox>
                 <EngagementButtons>
-                    <Engagement image={"Image 2.png"} action={(e) => { setLike(!like);}} text={like ? heartCount + 1 : heartCount}/>
-                    <Engagement image={"message.png"} text="999" action={(e) => {setExpandComments(!expandComments);}}/>
+                        <Engagement image={"Image 2.png"} action={(e) => { setLike(!like);}} text={like ? heartCount + 1 : heartCount}/>
+                        <Engagement image={"message.png"} text="999" action={(e) => {setExpandComments(!expandComments);}}/>
                 </EngagementButtons>
                 <CommentContent expandComments={expandComments} >
                     <Comments onCommentSubmit={(comment) => setComments([comment, ...comments])}/>
                     {comments.map(comment => <Reply image={'https://i.pinimg.com/originals/e0/f0/e8/e0f0e8ab0cb3edda52e1312be241b449.jpg'} text={comment}/>)}
                 </CommentContent>
-            </Postbox>
+            </ReplyBox>
         </Root>
      )
 }
 
 const Root = styled.div`
+    position: relative;
+    min-height: 100px;
     display: flex;
-    padding-top: 3%;
-    padding-bottom: 3%;
+    margin: 10px 10px 0 0;
     justify-content: flex-start;
     flex-direction: column;
     align-items: center;
@@ -69,11 +72,13 @@ const AuthorDetails = styled.div`
     flex-direction: row;
     align-items: center;
     width: 100%;
+    padding-bottom: 10px;
 `;
 
 const PostImage = styled.div`
     width: 100%;
     height: 500px;
+    border: 1px solid #f4f4f4;
  `;   
 
  const PostWrite =styled.div`
@@ -83,6 +88,17 @@ const PostImage = styled.div`
     margin-left: 1rem;
     margin-right: 1rem;
     margin-bottom: 1rem;
+`;
+
+const ReplyBox = styled.div`
+    border-top: 1px solid #f4f4f4;
+    background: #fcfcfc;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
 `;
 
 const PostContent = styled.span`
@@ -118,11 +134,11 @@ const Details = styled.div`
 `;
 
 const Postbox = styled.div` 
-    margin-top: 1rem;
     width: 100%;
-    border-radius: 30px;
     background-color: white;
     height: auto;
+    padding: 40px 40px 10px;
+    border-bottom: 1px solid #dedede;
 `;
 
 const EngagementButtons = styled.div`

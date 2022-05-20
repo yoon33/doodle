@@ -37,10 +37,11 @@ function App() {
     <ModalProvider>
     <Root>
       <Navbar/>
-      <Banner/>
-      {isLoggedIn ? <Page>
+      <NarrowBanner/>
+      {isLoggedIn ? 
+      <Page>
         <PostsContainer>
-        <PreviewSubmission handleShow={handleShow}/>
+          <PreviewSubmission handleShow={handleShow}/>
           <Modal show={modalVisible}>
             <Modal.Title>
               <div style={{display: 'flex', width: '100%', height: 'auto', flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -68,12 +69,16 @@ function App() {
 
 const PostsContainer = styled.div`
   height: fit-content;
-  width: 60%;
   margin: 0 auto;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 `;
+
+const NarrowBanner = styled(Banner)`
+  width: 70%;
+  margin: 0 auto;
+`
 
 const Posts = styled.ul`
   display: block;
@@ -89,11 +94,13 @@ const Root = styled.div`
 `;
 
 const Page = styled.div`
-  width: 100%;
+  width: 70%;
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
   margin: 0 auto;
   margin-top: 2rem;
+  gap: 10px;
 `;
 
 const Infos = styled.div`
@@ -103,8 +110,6 @@ const Infos = styled.div`
   left: 0;
   align-self: start;
   flex-direction: column;
-  margin-right: 15rem;
-  padding-bottom: 10px;
   gap: 10px;
 `;
 

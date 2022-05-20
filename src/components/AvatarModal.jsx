@@ -85,9 +85,8 @@ const File = styled.input`
 
 const Image = styled.div`
     border-radius: 50%;
+    border: 1px solid #f4f4f4;
     background-color: white;
-    margin-right: 1rem;
-    margin-left: 1rem;
     width: 80%; 
     height: 50%;
     background-size: cover;
