@@ -6,23 +6,23 @@ export function Info(props) {
     const { titleOne, titleTwo, iconOne, iconTwo, valueOne, valueTwo } = props;
     return (
         <Root>
-            <Information>
-                <Detail> Info </Detail>
-                <Follower>
-                    <Pic image={iconOne} />
-                    <Script>
-                        <div>{titleOne}</div>
-                        <div>{valueOne}</div>
-                    </Script>
-                </Follower>
-                <Follower>
-                    <Pic image = {iconTwo} />
-                    <Script>
-                        <div>{titleTwo}</div>
-                        <div>{valueTwo}</div>
-                    </Script>
-                </Follower>
-            </Information>
+            <Detail> Info </Detail>
+                <ListInfo>
+                    <SubInfo>
+                        <Pic image={iconOne} />
+                        <Script>
+                            <div>{titleOne}</div>
+                            <div>{valueOne}</div>
+                        </Script>
+                    </SubInfo>
+                    <SubInfo>
+                        <Pic image = {iconTwo} />
+                        <Script>
+                            <div>{titleTwo}</div>
+                            <div>{valueTwo}</div>
+                        </Script>
+                    </SubInfo>
+            </ListInfo>
         </Root>
     )
 }
@@ -30,39 +30,42 @@ export function Info(props) {
 
 const Root = styled.div`
     margin: 0 auto;
-    min-width: 12rem;
-    display: flex;
-    align-self: center;
+    position: relative;
+    width: 182px;
+    height: 212px;
+    padding: 0 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #d2d2d2;
+    background-color: #fff;
 `;
 
-const Information = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    justify-content: flex-start;
-    background-color: white;
-    align-self: center;
-    gap: 15px;
- `;   
-
  const Detail = styled.div`
-    width: 70%;
-    margin-left: 15%;
-    margin-right: 15%;
-    margin-top: 15%;
-    font-size: 20px;
-    border-bottom: 2px solid #d2d2d2;
+    margin: 0 auto;
+    padding: 19px 0 7px 5px;
+    font-size: 15px;
+    font-weight: 450;
+    line-height: 18px;
+    color: #1f1d1d;
+    border-bottom: 3px solid #e5e5e5;
  `;
 
- const Follower = styled.div`
-    margin-top: 8%;
-    width: 70%;
-    margin: 0 auto;
+ const ListInfo = styled.div`
+    position: relative;
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+ `;
+
+ const SubInfo = styled.div`
+    gap: 20px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #1f1d1d;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    padding-top: 10px;
 `;
 
 const Pic = styled.div`

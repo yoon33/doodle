@@ -15,7 +15,6 @@ const Root = styled.div`
     background-repeat: no-repeat;
     height: 342px;
     width: 100%;
-    z-index: 11;
     position: relative;
     text-align: center;
     font-size: 30px;

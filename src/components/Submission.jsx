@@ -41,26 +41,90 @@ export function Submission(props) {
 
     return (
         <Root>
-            <Image style={{width: '100px', height: '100px', backgroundImage: 'url("https://i.pinimg.com/originals/e0/f0/e8/e0f0e8ab0cb3edda52e1312be241b449.jpg")', backgroundSize: 'cover'}}></Image>
-            <SubmitBox>
-                <TextInput type='text' onChange = {(e) => {setPost({...post, text: e.target.value});}} />
-                <PreviewImage>
-                    { filesContent.length > 0 ? <img width="80%" height="auto" style={{margin: "0 auto"}} object-fit="fill" src={filesContent[0].content}/> : null }
-                </PreviewImage>
-                <Options>
-                    <Icon image={"file.png"} onClick={() => openFileSelector()}/>
-                    <Icon image={"camera.png"}/>
-                    <Icon type="submit" image={"submitcheck.png"} onClick={(e) => { e.preventDefault(); addPost(post); submitAction(); }}/>
-                </Options>
+           <SubmitBox>
+                <Image/>   
+                <TextInput placeholder="Whatchu thinking? :)" contenteditable="true" onChange = {(e) => {setPost({...post, text: e.target.value});}} />
             </SubmitBox>
+            <PreviewImage>
+                    { filesContent.length > 0 ? <img width="80%" height="auto" style={{margin: "0 auto"}} object-fit="fill" src={filesContent[0].content}/> : null }
+            </PreviewImage>
+            <Options>
+                    <Option image={"file.png"} onClick={() => openFileSelector()} text="File"/>
+                    <Option image={"camera.png"} text="Camera" last/>
+            </Options>
+            <SubmitContainer>
+                <Cancel onClick={submitAction}>Cancel</Cancel>
+                <Upload type="submit" onClick={(e) => { e.preventDefault(); addPost(post); submitAction(); }}>Upload</Upload>
+            </SubmitContainer>
         </Root>
     )   
 }
 
+const Option = (props) => {
+    const {image, text, onClick} = props;
+
+    return(
+        <OptionContainer onClick={onClick} last={props.last ?? false}>
+            <Icon image={image} />
+            <Text>{text}</Text>
+        </OptionContainer>
+    )
+}
+
+const OptionContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    border: 1px solid #d9d9d9;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-right-width: ${props => props.last ? '1px' : '0px'};
+    padding: 1rem;
+
+    &:hover {
+        background-color: #f3f3f3;
+    }
+
+`;
+
+const Cancel = styled.button`
+    margin-top: 1rem;
+    border: 1px solid #999;
+    padding: 5px;
+    background-color: #fff;
+    color: #646464;
+    cursor: pointer;
+`;
+
+const Upload = styled.div`
+    margin-top: 1rem;
+    border: 1px solid #8B7DE6;
+    padding: 5px;
+    background-color: #8B7DE6;
+    color: #fff;
+    cursor: pointer;
+`;
+
+const SubmitContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+`;
+
+const Text = styled.span`
+    cursor: pointer;
+`;
+
 const Image = styled.div`
     border-radius: 50%;
     background-color: white;
-    margin-right: 1rem;
+    width: 100px;
+    height: 100px;
+    background-image: url("https://i.pinimg.com/originals/e0/f0/e8/e0f0e8ab0cb3edda52e1312be241b449.jpg");
+    background-size: cover;
+    display: block;
+    float: left;
 `;
 
 const PreviewImage = styled.div`
@@ -75,32 +139,25 @@ const Icon = styled.div`
     border: none;
     background-color: inherit;
     cursor: pointer;
-    width: 35px;
-    height: 35px;
-    margin-right: 1.5rem;
-    margin-bottom: 0.5rem;
-    margin-top: 2rem;
+    width: 22px;
+    height: 22px;
+    margin-right: 0.2rem;
+    // margin-bottom: 0.5rem;
+    // margin-top: 2rem;
     white-space: ${props => props.post? 'normal' : 'nowrap'}
 `;
 
 const Root = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
-    align-self: center;
-    align-items: center;
-    padding-bottom: 1rem;
+    margin: 1rem;
 `;
 
 const SubmitBox = styled.form`
-    display: flex;
-    align-items: ${props => props.isPreview ? "flex-middle" : "flex-end"};
-    text-align: center;
-    flex-direction: column;
-    justify-content: space-between;
     width: 100%;
     background-color: white;
-    height: 50px;
+    min-height: 50px;
 
     :hover {
         background-color: ${props => props.isPreview ? "#929292" : "white"};
@@ -110,15 +167,27 @@ const SubmitBox = styled.form`
 const Options = styled.div`
     display: flex;
     flex-direction: row;
+    float: left;
+    align-self: center;
 `;
 
-const TextInput = styled.input`
-    display:flex;
+const TextInput = styled.textarea`
+    display: inline-block;
     align-self: center;
     justify-content: flex-start;
     border: 0;
     box-shadow: white;
     appearance: none;
+    width: calc(100% - 100px);
+    min-height: 200px;
+    height: auto;
+    word-wrap: break-word;
     outline: none;
-    width: 100%;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+`;
+
+const InputContainer = styled.div`
 `;

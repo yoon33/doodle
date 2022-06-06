@@ -9,18 +9,23 @@ import { Post } from './components/Post';
 import { Info } from './components/Info';
 import { Banner } from './components/Banner';
 import { Comments } from './components/Comments';
-import { Modal } from 'react-bootstrap';
+// import { Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { findByLabelText } from '@testing-library/react';
 import { ModalProvider } from 'styled-react-modal';
 import Login from './components/Login/Login';
+import { Hashtag } from './components/Hashtag';
+import Modal from 'react-modal';
 
 const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
 function App() {
 
   const handleClose = () => setModalVisible(false);
-  const handleShow = () => setModalVisible(true);
+  const handleShow = () => {
+    console.log("showing")
+    setModalVisible(true);
+  }
 
   const [modalVisible, setModalVisible] = useState(false);
   const [posts, setPosts] = useState([{text: lorem, image: 'url(https://images.ctfassets.net/nx3pzsky0bc9/1iEFl85iyJNpOsyf7cuOso/490ade4e955f040f45b01f3105fe434a/golden2.jpg?w=1200&h=627&fit=fill&f=faces&fm=webp)'}, {text: "Peanutbutter jelly time"}, {text: "Hello world"}]);
@@ -34,7 +39,7 @@ function App() {
   },[isLoggedIn])
 
   return (
-    <ModalProvider>
+    <ModalProvider isModalOpen={modalVisible}>
     <Root>
       <Navbar/>
       <NarrowBanner/>
@@ -42,26 +47,23 @@ function App() {
       <Page>
         <PostsContainer>
           <PreviewSubmission handleShow={handleShow}/>
-          <Modal show={modalVisible}>
-            <Modal.Title>
-              <div style={{display: 'flex', width: '100%', height: 'auto', flexDirection: 'row', justifyContent: 'space-between'}}>
-                <p>Write a Post</p>
-                <button onClick={handleClose} style={{width: '35px', height: '35px'}}>X</button>
-              </div>
-            </Modal.Title>
-            <Modal.Body>
+          <CustomModal 
+            isOpen={modalVisible}
+            onAfterOpen={handleShow}
+            onRequestClose={handleClose}
+            contentLabel="Write a Post"
+            style={{overlay: {backgroundColor: 'rgba(51, 51, 51, 0.5)'}}}>
               <Submission addPost={(postContent) => setPosts([postContent, ...posts])} submitAction={handleClose}/>
-            </Modal.Body>
-          </Modal>
+          </CustomModal>
           <Posts>
             { posts.map(post => <Post text={post.text} image={post.image}/>)}
           </Posts>
         </PostsContainer>
         <Infos>
           <Info titleOne="followers" iconOne={"followers.png"} titleTwo="story" iconTwo = "writing.png" valueOne="999,9999" valueTwo = "999"/>
-          <Info titleOne="birthday" iconOne="birthday.png" dob="05/18/1994" titleTwo="#hashtag" iconTwo="trending.png" valueTwo="#summer23"/>
+          <Hashtag />
         </Infos>
-      </Page> : <Login/> }
+      </Page> : <Login/> }  
     </Root>
     </ModalProvider>
   );
@@ -89,8 +91,8 @@ const Posts = styled.ul`
 `;
 
 const Root = styled.div`
-  background-color: #F3F3F3;
   scrollbar-width: none;
+  background-color: #F3F3F3;
 `;
 
 const Page = styled.div`
@@ -112,5 +114,31 @@ const Infos = styled.div`
   flex-direction: column;
   gap: 10px;
 `;
+
+const Button = styled.button`
+  color: green;
+`;
+
+const CustomModal = styled(Modal)`
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 40%;
+  min-height: 30%;
+  height: fit-content;
+  box-shadow: 0 1px 0 rgb(0 0 0 / 10%);
+  background-color: ${props => !props.isModalOpen ? "white" : "#333"};
+`
+
+// const ModalContainer = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   flex-direction: column;
+// `
 
 export default App;
